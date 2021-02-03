@@ -1,0 +1,76 @@
+<app-header [page]="page"></app-header>
+<div class="header">
+  <div class="container">
+    <h4 class="text-center">Register to list your machine for rent</h4>
+
+  </div>
+</div>
+<div class="container content">
+
+  <div class="login-form">
+    <form #reg="ngForm">
+      <div class="form-group">
+        <label for="fname">Company name</label>
+        <input type="text" class="form-control" name="name" placeholder="Company name" [(ngModel)]="userReg.data.company_name" #name="ngModel"
+          required>
+        <div *ngIf="name.invalid && (name.touched || name.dirty)" class="mazi-danger">
+          <span *ngIf="name.errors.required">Please, Company name is required!</span>
+        </div>
+      </div>
+      <!-- <div class="form-group">
+        <label for="lname">Last name</label>
+        <input type="text" class="form-control" id="lname" placeholder="Last name">
+      </div> -->
+      <div class="form-group">
+        <label for="phone">Company Phone number</label>
+        <input type="number" class="form-control" name="phone" placeholder="Company Phone number" [(ngModel)]="userReg.data.phone"
+          #phone="ngModel" required>
+        <div *ngIf="phone.invalid && (phone.touched || phone.dirty)" class="mazi-danger">
+          <span *ngIf="phone.errors.required">Please, Phone number is required!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Company Email address</label>
+        <input type="email" class="form-control" name="email" placeholder="Company Email" [(ngModel)]="userReg.data.email" required
+          pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel">
+        <div *ngIf="email.invalid && (email.touched || email.dirty)" class="mazi-danger">
+          <span *ngIf="email.errors.pattern">Please, enter the correct Email format!</span>
+          <span *ngIf="email.errors.required">Please, Email is required!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="userReg.data.password" #password="ngModel"
+          required>
+        <div *ngIf="password.invalid && (password.touched || password.dirty)" class="mazi-danger">
+          <span *ngIf="password.errors.required">Please, password is required!</span>
+        </div>
+      </div>
+      <button type="submit" [disabled]="!reg.form.valid" class="button btn-login btn-lg" (click)="register()">Register
+        <img *ngIf="loader" src="assets/images/loader.gif" width="25">
+      </button>
+      <p class="last">
+        <a [routerLink]="['/login']">Already have an account? Login</a>
+      </p>
+    </form>
+  </div>
+</div>
+<div class="subscribe">
+  <div class="container">
+    <form>
+      <div class="row">
+        <div class="five columns">
+          <h4>Subscribe to stay updated</h4>
+          <p>Sign up for FREE email alerts on listings</p>
+        </div>
+        <div class="five columns">
+          <input class="u-full-width" placeholder="Type your email here" id="subscribe" type="text" style="margin-top: 20px;">
+        </div>
+        <div class="two columns">
+          <input class="button button-primary" value="SEARCH" type="submit" style="margin-top: 20px;">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

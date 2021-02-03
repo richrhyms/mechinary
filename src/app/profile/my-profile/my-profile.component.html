@@ -1,0 +1,65 @@
+<div class="dashboard">
+  <h4>
+    <i class="fa fa-user"></i> User Profile</h4>
+  <form #profile="ngForm">
+    <div class="row">
+      <div class="six columns">
+        <label for="company_name">Company Name</label>
+        <input class="u-full-width" id="company_name" placeholder="Engima Consult" name="name" type="text" [(ngModel)]="profileDetails?.data.company_name"
+          #name="ngModel" required>
+        <div *ngIf="name.invalid && (name.touched || name.dirty)" class="mazi-danger">
+          <span *ngIf="name.errors.required">Please, Name is required!</span>
+        </div>
+      </div>
+      <div class="six columns">
+        <label for="email">Company Email (Disabled)</label>
+        <input class="u-full-width" id="email" placeholder="admin@engimaconsult.com" name="email" type="email" disabled [(ngModel)]="profileDetails?.data.email"
+          #email="ngModel" required>
+        <div *ngIf="email.invalid && (email.touched || email.dirty)" class="mazi-danger">
+          <span *ngIf="email.errors.required">Please, Email is required!</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="six columns">
+        <label for="location">location (Town)</label>
+        <input class="u-full-width" id="location" placeholder="Location" name="location" type="text" [(ngModel)]="profileDetails?.data.location"
+          #location="ngModel" required>
+        <div *ngIf="location.invalid && (location.touched || location.dirty)" class="mazi-danger">
+          <span *ngIf="location.errors.required">Please, Location is required!</span>
+        </div>
+      </div>
+      <div class="six columns">
+        <label for="phone">Phone Number</label>
+        <input class="u-full-width" id="phone" placeholder="Company Phone Number" name="phone" type="text" [(ngModel)]="profileDetails?.data.phone"
+          #phone="ngModel" required>
+        <div *ngIf="phone.invalid && (phone.touched || phone.dirty)" class="mazi-danger">
+          <span *ngIf="phone.errors.required">Please, Phone is required!</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="six columns">
+        <label for="address">Address</label>
+        <input class="u-full-width" id="address" placeholder="Address" name="address" type="text" [(ngModel)]="profileDetails?.data.address"
+          #address="ngModel" required>
+        <div *ngIf="address.invalid && (address.touched || address.dirty)" class="mazi-danger">
+          <span *ngIf="address.errors.required">Please, Address is required!</span>
+        </div>
+      </div>
+      <div class="six columns">
+        <label for="certificate">Upload CAC Certificate (doc format eg; .pdf)</label>
+        <input class="u-full-width" id="certificate" placeholder="Company Phone Number" style="border: 1px #D1D1D1 solid;border-radius: 5px;padding: 6px 0;"
+          name="file" type="file" (change)="grabFile($event)" accept=".pdf" #cert="ngModel" [(ngModel)]="cert.file" required>
+        <span *ngIf="photoLoader" class="text-warning">
+          <strong>Please wait, image uploading...</strong>
+        </span>
+      </div>
+    </div>
+    <p>
+      <button class="button button-primary" id="upBtn" [disabled]="!profile.form.valid" (click)="updateProfile()">Update Profile
+        <img *ngIf="loader" src="assets/images/loader.gif" width="25">
+      </button>
+    </p>
+  </form>
+</div>

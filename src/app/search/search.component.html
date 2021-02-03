@@ -1,0 +1,36 @@
+<div class="header">
+  <div class="container">
+    <h4 class="text-center">Search for Machines for Rent in Nigeria</h4>
+    <form>
+      <div class="row">
+        <div class="four columns">
+          <label for="what">What do you need?</label>
+          <select class="u-full-width" id="what" name="category" [(ngModel)]="category">
+            <option selected>Select category</option>
+            <option *ngFor="let category of categories" class="mazi-text-transform" [ngValue]="category.category_name">{{category.category_name}}</option>
+          </select>
+        </div>
+        <div class="four columns">
+          <label for="where">Where do you need it?</label>
+          <select class="u-full-width" id="what2" name="category" [(ngModel)]="location">
+            <option selected>Select location</option>
+            <option value="Abuja">Abuja</option>
+            <option value="Asaba">Asaba</option>
+            <option value="Calabar">Calabar</option>
+            <option value="Lagos">Lagos</option>
+            <option value="Port harcourt">Port harcourt</option>
+            <option value="Warri">Warri</option>
+          </select>
+        </div>
+        <!-- <div class="three columns">
+          <label for="when">When do you need it?</label>
+          <input data-toggle="datepicker" class="u-full-width" placeholder="When do you need it?" type="text" name="datepicker" [(ngModel)]="machinery.datepicker">
+        </div> -->
+        <div class="four columns">
+          <div style="margin-top: 30px;"></div>
+          <input class="button button-primary" value="SEARCH" type="submit" (click)="searchMachineries()">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

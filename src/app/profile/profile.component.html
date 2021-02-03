@@ -1,0 +1,69 @@
+<div style="background: #333 url(../assets/images/bg.png);">
+  <!-- Top
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="top-pager">
+  </div>
+  <div class="top">
+    <div class="container">
+      <div class="four columns">
+        <img [routerLink]="['/home']" src="assets/images/logo-white.png" class="logo">
+      </div>
+      <div class="eight columns">
+
+        <a (click)="logout()" class="button button-login">Log out</a>
+        <ul class="menu">
+
+          <li>
+            <a [routerLink]="['/machines']">Machines</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Header
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="header">
+    <div class="container">
+      <h3 class="text-white mazi-text-transform">Welcome, {{profile?.company_name}}!</h3>
+    </div>
+  </div>
+  <!-- Content
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="content">
+    <div class="container">
+      <div class="three columns">
+        <div class="sidebar">
+          <div class="profile-img">
+            <img src="assets/images/user.png">
+            <p>
+              <a class="mazi-text-transform">{{profile?.company_name}}</a>
+            </p>
+          </div>
+          <ul>
+            <li>
+              <a (click)="activePage = 'dashboard'" [class.active]="activePage=='dashboard'" [routerLink]="['/profile/dashboard']">
+                <i class="fa fa-dashboard"></i> Dashboard</a>
+            </li>
+            <li>
+              <a (click)="activePage = 'profile'" [class.active]="activePage=='profile'" [routerLink]="['/profile/my-profile']">
+                <i class="fa fa-user"></i> My Profile</a>
+            </li>
+            <li>
+              <a (click)="activePage = 'list'" [class.active]="activePage=='list'" [routerLink]="['/profile/my-listings']">
+                <i class="fa fa-list"></i> Your Listings</a>
+            </li>
+            <li>
+              <a (click)="logout()">
+                <i class="fa fa-power-off"></i> Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="nine columns">
+        <router-outlet></router-outlet>
+      </div>
+
+    </div>
+
+  </div>
+  <app-footer></app-footer>

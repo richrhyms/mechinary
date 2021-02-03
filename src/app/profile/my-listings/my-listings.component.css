@@ -1,0 +1,27 @@
+.modal-dial{
+    background: #fefefe;
+    border: #333 solid 1px;
+    border-radius: 5px;
+    margin-left: -200px;
+    position: fixed;
+    left: 50%;
+    top: 5%;
+    z-index: 11;
+    width: 550px;
+    transition: transform 0.3s ease-out;
+}
+
+.modal-b {
+    content: "";
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.mazi-padding{
+    padding: 0px 15px !important;
+}

@@ -1,0 +1,56 @@
+<app-header [page]="page"></app-header>
+<div class="header">
+  <div class="container">
+    <h4 class="text-center">Login to access your account</h4>
+
+  </div>
+</div>
+<div class="container content">
+
+  <div class="login-form">
+    <form #login="ngForm">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" name="email" placeholder="Company Email" [(ngModel)]="userDetails.data.email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+        #email="ngModel">
+        <div *ngIf="email.invalid && (email.touched || email.dirty)" class="mazi-danger">
+            <span *ngIf="email.errors.pattern">Please, enter the correct Email format!</span>
+            <span *ngIf="email.errors.required">Please, Email is required!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="userDetails.data.password" #password="ngModel"
+        required>
+        <div *ngIf="password.invalid && (password.touched || password.dirty)" class="mazi-danger">
+          <span *ngIf="password.errors.required">Please, Password is required!</span>
+        </div>
+      </div>
+      <button type="submit" class="button btn-login btn-lg" [disabled]="!login.form.valid" (click)="loginUser()">Login <img *ngIf="loader" src="assets/images/loader.gif" width="25"></button>
+      <p class="last">
+        <a >Forgot password</a>
+        <span>|</span>
+        <a [routerLink]="['/register']">Create an account to list your machine</a>
+      </p>
+    </form>
+  </div>
+</div>
+<div class="subscribe">
+  <div class="container">
+    <form>
+      <div class="row">
+        <div class="five columns">
+          <h4>Subscribe to stay updated</h4>
+          <p>Sign up for FREE email alerts on listings</p>
+        </div>
+        <div class="five columns">
+          <input class="u-full-width" placeholder="Type your email here" id="subscribe" type="text" style="margin-top: 20px;">
+        </div>
+        <div class="two columns">
+          <input class="button button-primary" value="SUBSCRIBE" type="submit" style="margin-top: 20px;">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

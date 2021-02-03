@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Machinery</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="assets/css/skeleton.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/jquery.bxslider.css">
+  <link rel="stylesheet" href="assets/css/datepicker.css">
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+
+  <!-- JS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="assets/js/datepicker.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('[data-toggle="datepicker"]').datepicker();
+    });
+  </script>
+  <script src="assets/js/jquery.bxslider.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.slider').bxSlider(
+        {
+          maxSlides: 4,
+          minSlides: 4,
+          slideWidth: 290,
+          slideMargin: 15,
+          auto: true
+        });
+    });
+  </script>
+
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+<app-header [page]="page"></app-header>
+<div class="header">
+  <h4 *ngIf="!loader2" class="text-center">Please, wait...</h4>
+  <div *ngIf="loader2" class="container">
+    <h4 [innerHtml]="loader ? 'Error! <br> Please, contact Admin.' : 'Thanks for Subscribing!'" class="text-center"></h4>
+    <h5 *ngIf="!loader" class="text-center"><a routerLink="/profile/dashboard">Go to Your Account</a></h5>
+  </div>
+</div>

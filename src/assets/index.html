@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Machinery.ng</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/jquery.bxslider.css">
+  <link rel="stylesheet" href="css/datepicker.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+  
+    <!-- JS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="js/datepicker.min.js"></script>
+  <script>
+  	$(document).ready(function(){
+  		$('[data-toggle="datepicker"]').datepicker();
+	});
+  </script>
+  <script src="js/jquery.bxslider.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $('.slider').bxSlider(
+	  {
+		  maxSlides: 4,
+		  minSlides: 4,
+		  slideWidth: 290,
+		  slideMargin: 15,
+		  auto: true
+	  });
+    });
+  </script>
+  
+
+</head>
+<body>
+
+  <!-- Top
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="top">
+  	<div class="container">
+        	<div class="four columns">
+            	<img src="images/logo-white.png" class="logo">
+           </div>
+           <div class="eight columns">
+           	
+                <a href="#" class="button button-list">List a Machines</a>
+                <a href="#" class="button button-login">Login</a>
+                <ul class="menu">
+                   <li><a href="#">About us</a></li>
+                   <li><a href="#">Contact</a></li>
+                   <li><a href="#">Register</a></li>
+            	</ul>
+           </div>
+    </div>
+  </div>
+    <!-- Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="header">
+  	<div class="container">
+    	<h4 class="text-center">Search for Machines for Rent in Nigeria</h4>
+		<form>
+      <div class="row">
+        <div class="three columns">
+          <label for="what">What do you need?</label>
+          <select class="u-full-width" id="what">
+          <option value="Option 0" selected>Select category</option>
+            <option value="Option 1">Road Construction</option>
+            <option value="Option 2">Drilling</option>
+            <option value="Option 3">Power generation</option>
+            <option value="Option 4">Earth moving</option>
+            <option value="Option 5">Cranes</option>
+            <option value="Option 6">Forklifts</option>
+          </select>
+        </div>
+        <div class="three columns">
+			<label for="where">Where do you need it?</label>
+          <select class="u-full-width" id="what">
+          <option value="Option 0" selected>Select location</option>
+            <option value="Option 1">Portharcourt</option>
+            <option value="Option 2">Calabar</option>
+            <option value="Option 3">Warri</option>
+            <option value="Option 4">Asaba</option>
+            <option value="Option 5">Abuja</option>
+            <option value="Option 6">Lagos</option>
+          </select>
+        </div>
+        <div class="three columns">
+			<label for="when">When do you need it?</label>
+          <input data-toggle="datepicker" class="u-full-width" placeholder="When do you need it?" type="text">
+        </div>
+        <div class="three columns">
+        	<div style="margin-top: 30px;"></div>
+			<input class="button button-primary" value="SEARCH" type="submit">
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+  
+    <!-- Content
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container content">
+	<h4 class="text-center">Featured machines</h4>
+    <div class="slider">
+        <div>
+        	<a href="list-detail.html" class="featured-item">
+            	<img src="images/feature/1.jpg">
+                <div class="list-name">Forklift</div>
+                <div class="location"><i class="fa fa-map-marker"></i> Abuja</div>
+                <div class="price">N200,000 <span>per day</span></div>
+           </a>
+         </div>
+        <div>
+        	<a href="list-detail.html" class="featured-item">
+            	<img src="images/feature/2.jpg">
+                <div class="list-name">Driller</div>
+                <div class="location"><i class="fa fa-map-marker"></i> Warri</div>
+                <div class="price">N180,000 <span>per day</span></div>
+           </a>
+        </div>
+        <div>
+        	<a href="list-detail.html" class="featured-item">
+            	<img src="images/feature/3.jpg">
+                <div class="list-name">Road Rollers</div>
+                <div class="location"><i class="fa fa-map-marker"></i> PortHarcourt</div>
+                <div class="price">N120,000 <span>per day</span></div>
+           </a>
+        </div>
+        <div>
+        	<a href="list-detail.html" class="featured-item">
+            	<img src="images/feature/4.jpg">
+                <div class="list-name">JCB Rollers</div>
+                <div class="location"><i class="fa fa-map-marker"></i> Calabar</div>
+                <div class="price">N170,000 <span>per day</span></div>
+           </a>
+        </div>
+        <div>
+        	<a href="list-detail.html" class="featured-item">
+            	<img src="images/feature/5.jpg">
+                <div class="list-name">Cranes</div>
+                <div class="location"><i class="fa fa-map-marker"></i> PortHarcourt</div>
+                <div class="price">N175,000 <span>per day</span></div>
+           </a>
+        </div>
+        <div>
+        	<a href="list-detail.html" class="featured-item">
+            	<img src="images/feature/6.jpg">
+                <div class="list-name">Power Generation</div>
+                <div class="location"><i class="fa fa-map-marker"></i> PortHarcourt</div>
+                <div class="price">N140,000 <span>per day</span></div>
+           </a>
+        </div>
+      </div>
+    <!-- Categories -->
+    <div class="cat-featured">
+    	<h4 class="text-center">Popular Categories</h4>
+        <ul>
+        	<li>
+            <a href="#">
+            	<img src="images/icon/road.png">
+            	<p>Road Construction</p>
+            </a>
+            </li>
+            <li>
+            <a href="#">
+            	<img src="images/icon/earth.png">
+            	<p>Earth Moving</p>
+            </a>
+            </li>
+            <li>
+            <a href="#">
+            	<img src="images/icon/forklift.png">
+            	<p>Forklifts</p>
+            </a>
+            </li>
+            <li>
+            <a href="#">
+            	<img src="images/icon/cranes.png">
+            	<p>Cranes</p>
+            </a>
+            </li>
+            <li>
+            <a href="#">
+            	<img src="images/icon/drill.png">
+            	<p>Drilling Rigs</p>
+            </a>
+            </li>
+            <li>
+            <a href="#">
+            	<img src="images/icon/power.png">
+            	<p>Power Generation</p>
+            </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+        <div class="text-center">
+        	<p><a href="#" class="button button-primary">View all listings</a></p>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- How it works -->
+    <div class="how">
+    	<h4 class="text-center">How it works</h4>
+        <div class="row text-center">
+            <div class="four columns">
+                <img src="images/how-to1.png">
+                <p>Machines are listed by various owners and vendors</p>
+            </div>
+            <div class="four columns">
+                <img src="images/how-to2.png">
+                <p>Customers can search for machines that they are interested in using for their work.</p>
+            </div>
+            <div class="four columns">
+                <img src="images/how-to3.png">
+                <p>Customers are connected to the owner of the piece of machine they need.</p>
+            </div>
+        </div>
+    </div>
+    
+  </div>
+  <div class="subscribe">
+  	<div class="container">
+    	<form>
+        <div class="row">
+            <div class="five columns text-white">
+                <h4>Subscribe to stay updated</h4>
+                <p>Sign up for FREE email alerts on listings</p>
+            </div>
+            <div class="five columns">
+              <input class="u-full-width" placeholder="Type your email here" id="subscribe" type="text" style="margin-top: 20px;">
+            </div>
+            <div class="two columns">
+            	<input class="button button-primary" value="SEARCH" type="submit" style="margin-top: 20px;">
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div class="footer">
+  	<div class="container">
+    	<div class="row">
+        	<div class="four columns">
+           	<img src="images/logo-small.png">
+            <p>Machinery.ng is your reliable platform for the getting access to various machines that are available for rent.</p>
+            <p class="text-gray">&copy; 2018 Machinery.ng. All rights reserved.</p>
+           </div>
+           <div class="three columns">
+           	<h4>Welcome</h4>
+            	<ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Safe Renting</a></li>
+              </ul>
+           </div>
+           <div class="three columns">
+           	<h4>Help</h4>
+            <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Safe Renting</a></li>
+              </ul>
+           </div>
+           <div class="two columns">
+           	<h4>We are social</h4>
+            	<div class="social">
+                	<a href="#"><i class="fa fa-facebook-square"></i></a>
+                  <a href="#"><i class="fa fa-twitter-square"></i></a>
+                  <a href="#"><i class="fa fa-instagram"></i></a>
+               </div>
+           </div>
+        </div>
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+</body>
+</html>

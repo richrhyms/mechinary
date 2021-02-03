@@ -1,0 +1,14 @@
+.mazi-success{
+    color:#1eaedb !important;
+}
+
+.mazi-danger{
+    color: #e60909 !important;
+}
+.mazi-active{
+    background-color:#1eaedb !important;
+}
+.mazi-active a{
+    color: #f5efef !important;
+    background-color:#1eaedb !important;
+}

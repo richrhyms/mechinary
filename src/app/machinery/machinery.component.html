@@ -1,0 +1,165 @@
+<app-header></app-header>
+<app-search *ngIf="machinery?.classified==false"></app-search>
+<div *ngIf="machinery?.classified==true && categories" class="header">
+  <div class="container">
+    <h4 class="text-center">Search for Machines to Buy in Nigeria</h4>
+    <form>
+      <div class="row">
+        <div class="four columns">
+          <label for="what">What do you need?</label>
+          <select class="u-full-width" id="what" name="category" [(ngModel)]="filterData.category">
+            <option selected>Select category</option>
+            <option *ngFor="let category of categories" [ngValue]="category.category_name">{{category.category_name}}</option>
+          </select>
+        </div>
+        <div class="four columns">
+          <label for="where">Where do you need it?</label>
+          <select class="u-full-width" id="what2" name="category" [(ngModel)]="filterData.location">
+            <option value="PH" selected>Select location</option>
+            <option value="Abuja">Abuja</option>
+            <option value="Asaba">Asaba</option>
+            <option value="Calabar">Calabar</option>
+            <option value="Lagos">Lagos</option>
+            <option value="Portharcourt">Portharcourt</option>
+            <option value="Warri">Warri</option>
+          </select>
+        </div>
+        <!-- <div class="three columns">
+          <label for="when">When do you need it?</label>
+          <input data-toggle="datepicker" class="u-full-width" placeholder="When do you need it?" type="text" name="datepicker" [(ngModel)]="machinery.datepicker">
+        </div> -->
+        <div class="four columns">
+          <div style="margin-top: 30px;"></div>
+          <input class="button button-primary" value="SEARCH" type="submit" (click)="searchMachineries()">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="container content">
+  <div class="breadcrumb">
+    <a routerLink="/home">Home</a>
+    <i class="fa fa-angle-double-right"></i>
+    <a class="mazi-text-transform" (click)="searchCategory(machinery)">{{machinery?.category}}</a>
+    <i class="fa fa-angle-double-right mazi-text-transform"></i>
+    {{machinery?.name}}
+  </div>
+  <div *ngIf="networkError" align="center">
+    <h4>Network error!</h4>
+  </div>
+  <div *ngIf="loader" align="center">
+    <br>
+    <br>
+    <img src="assets/images/loader.gif" width="200" />
+  </div>
+  <div *ngIf="!loader && !networkError" class="row">
+    <div class="eight columns item-detail">
+      <div class="tag">
+        <div class="row">
+          <div class="eight columns">
+            <h4 class="mazi-text-transform">{{machinery?.name}}</h4>
+            <p>
+              <i class="fa fa-map-marker"></i> {{machinery?.location}}
+              <span>|</span> Added {{machinery?.created_at | date}}</p>
+          </div>
+          <div class="four columns text-right">
+            <h4>N{{machinery?.price | number}}
+              <br>
+              <span [innerHTML]="machinery.classified ? 'Price' : 'Per Day'"></span>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <img *ngIf="machinery?.image" src="{{machinery?.image}}">
+      <img *ngIf="!machinery?.image" src="assets/images/logo-white.png">
+      <h5>Description</h5>
+      <hr>
+      <h6>{{machinery?.description}}</h6>      
+      <!-- <h5>Features</h5>
+      <hr>
+      <ul>
+        <li>Capacity: 1200kg</li>
+        <li>Maximum Lift Capacity: 4500kg</li>
+        <li>Maximum Lift Height: 4.5m
+      </ul> -->
+    </div>
+    <div class="four columns">
+      <div class="contact-owner">
+        <h4>Contact Owner</h4>
+        <h5>Call Owner</h5>
+        <p>For an immediate response call this seller</p>
+
+        <div id="phone">
+          <button (click)="showNumber()">Show number</button>
+        </div>
+        <br>
+        <h5>Send Owner an email</h5>
+        <form>
+          <div class="row">
+            <div class="twelve columns">
+              <label for="name">Your name *</label>
+              <input class="u-full-width" placeholder="Your name" id="name" type="text">
+            </div>
+            <div class="twelve columns">
+              <label for="email">Your email</label>
+              <input class="u-full-width" placeholder="Your email" id="email" type="text">
+            </div>
+            <div class="twelve columns">
+              <label for="phone">Your phone</label>
+              <input class="u-full-width" placeholder="Your number" id="phone" type="text">
+            </div>
+            <div class="twelve columns">
+              <label for="message">Message</label>
+              <textarea class="u-full-width text-7" placeholder="I saw this machine for rent at www.machinery.ng/listID and would like some more information. Could you please contact me as soon as possible?"
+                id="message" rows="7"></textarea>
+            </div>
+          </div>
+          <input class="button button-contact" value="Submit" type="submit">
+        </form>
+        <hr>
+        <div *ngFor="let classified of classifieds">
+          <p>
+            <img *ngIf="classified.advert_area == 'Side'" [src]="classified.advert_image" class="" style="padding: 5px;background: #f3f3f3; border: 1px solid #f9f9f9; max-width: 100%; min-width: 100%; display: block !important;">
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- End details -->
+    <div *ngIf="!loader && !networkError" class="related-list">
+      <h4>Related listings</h4>
+      <div class="row">
+        <div *ngFor="let machinery of relatedMachineries" class="three columns">
+          <a (click)="getRelatedMachine(machinery._id)" class="featured-item">
+            <img *ngIf="machinery.image" src="{{machinery.image}}" height="225" width="300" class="catalog">
+            <img *ngIf="!machinery.image" src="assets/images/logo-white.png" height="225" width="300" class="catalog">
+            <div class="list-name mazi-text-transform" style="font-size: 15px !important;" [title]="machinery.name">{{stringCount(machinery.name)}}</div>
+            <div class="location">
+              <i class="fa fa-map-marker"></i> {{machinery.location}}</div>
+            <div class="price">N{{machinery.price | number}}
+              <span>per day</span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="subscribe">
+    <div class="container">
+      <form>
+        <div class="row">
+          <div class="five columns">
+            <h4>Subscribe to stay updated</h4>
+            <p>Sign up for FREE email alerts on listings</p>
+          </div>
+          <div class="five columns">
+            <input class="u-full-width" placeholder="Type your email here" id="subscribe" type="text" style="margin-top: 20px;">
+          </div>
+          <div class="two columns">
+            <input class="button button-primary" value="SEARCH" type="submit" style="margin-top: 20px;">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-footer></app-footer>

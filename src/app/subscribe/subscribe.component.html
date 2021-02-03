@@ -1,0 +1,65 @@
+<app-header [page]="page"></app-header>
+<div class="header">
+  <div class="container">
+    <h4 class="text-center">Subscribe to list your machine</h4>
+    <h5 *ngIf="message" style="background-color: rgb(28, 98, 228)" class="text-center text-white">Welcome, {{profile?.company_name}}!<br>Please, select a package to continue...</h5>
+  
+  </div>
+</div>
+<div class="container content">
+
+  <div id="fdw-pricing-table">
+    <h5 class="text-center">It is easy to start renting your machinaries here. Just go ahead and select what best fits your need and we would take
+      care of the rest</h5>
+    <div class="plan plan1">
+      <div class="header2">{{bronze?.subscription_package}}</div>
+      <p>The {{bronze?.subscription_package}} account gives you the opportunity to list a single machine for a period 30 days.</p>
+      <ul>
+        <li>It comes with the following:</li>
+        <li>1 machine listing</li>
+        <li>Use our contact details</li>
+      </ul>
+      <a class="signup" (click)="intializePayment(bronze)">SUBSCRIBE with N{{bronze?.price | number}}/month</a>
+    </div>
+    <div class="plan plan2">
+      <div class="header2">{{gold?.subscription_package}}</div>
+      <p>The {{gold?.subscription_package}} account gives you the opportunity to list more machines than the free account for a period 30 days.</p>
+      <ul>
+        <li>It comes with the following:</li>
+        <li>5 machine listings</li>
+        <li>Your own contact information</li>
+      </ul>
+      <a class="signup" (click)="intializePayment(gold)">SUBSCRIBE with N{{gold?.price | number}}/month</a>
+    </div>
+    <div class="plan plan3">
+        <div class="header2">{{platinum?.subscription_package}}</div>
+        <p>The {{platinum?.subscription_package}} account gives you with the opportunity to list more machines than other accounts for a period 30 days.</p>
+        <ul>
+          <li>It comes with the following:</li>
+          <li>Unlimited listings</li>
+          <li>Classified listings</li>
+          <li>Your own contact information</li>
+        </ul>
+        <a class="signup" (click)="intializePayment(platinum)">SUBSCRIBE with N{{platinum?.price | number}}/month</a>
+      </div>
+  </div>
+</div>
+<div class="subscribe">
+  <div class="container">
+    <form>
+      <div class="row">
+        <div class="five columns">
+          <h4>Subscribe to stay updated</h4>
+          <p>Sign up for FREE email alerts on listings</p>
+        </div>
+        <div class="five columns">
+          <input class="u-full-width" placeholder="Type your email here" id="subscribe" type="text" style="margin-top: 20px;">
+        </div>
+        <div class="two columns">
+          <input class="button button-primary" value="SEARCH" type="submit" style="margin-top: 20px;">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

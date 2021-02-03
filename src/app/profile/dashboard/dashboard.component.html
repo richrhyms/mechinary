@@ -1,0 +1,236 @@
+<!-- Dashboard -->
+<div *ngIf="loader" align="center">
+  <br>
+  <br>
+  <img src="assets/images/loader.gif" width="200" />
+</div>
+<div *ngIf="networkError" align="center">
+  <br>
+  <br>
+  <h4>Network error!</h4>
+</div>
+<div *ngIf="!loader && !networkError" class="dashboard">
+  <h4>
+    <i class="fa fa-dashboard"></i> Dashboard</h4>
+  <div class="analytics">
+    <div class="row">
+      <div class="six columns item-analytics orange">
+        <h3>{{countMachine}}</h3>
+        <p>No. of Machines Listed</p>
+      </div>
+      <div class="six columns item-analytics orange">
+        <h3>{{sub_end}} Days</h3>
+        <p>Subscription Validity</p>
+      </div>
+    </div>
+  </div>
+  <!-- Recent Listings -->
+  <h4>
+    <i class="fa fa-list"></i> Your RecentListings</h4>
+  <div *ngIf="machines?.length <1" align="center">
+    <br>
+    <br>
+    <br>
+    <h6>
+      <i>Yet to add a Machine!
+        <br>Click the button below to add one.</i>
+    </h6>
+    <br>
+    <br>
+  </div>
+  <table *ngIf="machines?.length >0" class="u-full-width">
+    <thead>
+      <tr>
+        <th>S/N</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price per day</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let machine of machines; let i = index">
+        <td>{{1+i}}</td>
+        <td class="mazi-text-transform">{{machine.name}}</td>
+        <td class="mazi-text-transform">{{machine.category}}</td>
+        <td>N{{machine.price | number}}</td>
+        <td [innerHTML]="machine.image ? 'Yes' : 'None'"></td>
+        <td>
+          <a (click)="viewMachine(machine)" style="color:#5cdf42;">
+            <i class="fa fa-eye"></i>
+          </a>
+          <a (click)="deleteMachine(machine._id)" style="color:#e62323;">
+            <i class="fa fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <a *ngIf="machines?.length >3" (click)="viewListings()" class="button" style="margin-right: 10px;">View all listings</a>
+    <a (click)="controlSubscription()" class="button button-primary">Add a machine</a>
+  </p>
+</div>
+
+<!-- Add Modal -->
+<div *ngIf="modal==true && categories" class="modal-b" id="modal-one" aria-hidden="true">
+  <div class="modal-dial">
+    <div class="modal-header">
+      <h2>Add a Machine</h2>
+      <a href (click)="modal=false" class="btn-close" aria-hidden="true">×</a>
+    </div>
+    <div class="modal-body">
+      <div class="login-form">
+        <form #adMachine="ngForm" style="margin-bottom: 0em;">
+          <div class="row">
+            <!-- Name -->
+            <div class="form-group six columns">
+              <label for="name">Name of Machinary</label>
+              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="machine.data.name" #name="ngModel" required>
+              <div *ngIf="name.invalid && (name.touched || name.dirty)" class="mazi-danger">
+                <span *ngIf="name.errors.required">Please, Name is required!</span>
+              </div>
+            </div>
+            <!-- Categories -->
+            <div class="form-group six columns">
+              <label for="categories">Category</label>
+              <select class="form-control" id="categories" title="Select a Category" name="category" [(ngModel)]="machine.data.category"
+                #cat="ngModel" required>
+                <option disabled>Select Category</option>
+                <option *ngFor="let category of categories" class="mazi-text-transform" [ngValue]="category.category_name">{{category.category_name}}</option>
+              </select>
+              <div *ngIf="cat.invalid && (cat.touched || cat.dirty)" class="mazi-danger">
+                <span *ngIf="cat.errors.required">Please, Category is required!</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Location -->
+            <div class="form-group six columns">
+              <label for="location">Location</label>
+              <select class="form-control" id="location" name="location" [(ngModel)]="machine.data.location" #location="ngModel" required>
+                <option disabled>Select Loction</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Port Harcourt">Port Harcourt</option>
+                <option value="Warri">Warri</option>
+                <option value="Calabar">Calabar</option>
+              </select>
+              <div *ngIf="location.invalid && (location.touched || location.dirty)" class="mazi-danger">
+                <span *ngIf="location.errors.required">Please, Location is required!</span>
+              </div>
+            </div>
+            <!-- Price -->
+            <div class="form-group six columns">
+              <label for="price">Price (in Naira)</label>
+              <input type="number" class="form-control" id="price" name="price" [(ngModel)]="machine.data.price" #price="ngModel" required>
+              <div *ngIf="price.invalid && (price.touched || price.dirty)" class="mazi-danger">
+                <span *ngIf="price.errors.required">Please, Price is required!</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Description -->
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control" id="description" name="description" [(ngModel)]="machine.data.description" #description="ngModel"
+                required></textarea>
+              <div *ngIf="description.invalid && (description.touched || description.dirty)" class="mazi-danger">
+                <span *ngIf="description.errors.required">Please, Description is required!</span>
+              </div>
+            </div>
+            <!-- Image -->
+            <div class="form-group">
+              <label for="image">Upload Image</label>
+              <input class="u-full-width" id="image" placeholder="image" style="border: 1px #D1D1D1 solid;border-radius: 5px;padding: 6px 0;"
+                name="file" type="file" accept=".png, .jpg, .jpeg" (change)="grabImage(1,$event)" #photo="ngModel" [(ngModel)]="photo.file" required>
+              <span *ngIf="photoLoader">
+                <strong class="text-warning">Please wait, image uploading...</strong>
+              </span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- Submit -->
+            <button (click)="addMachine()" id="adBtn" [disabled]="!adMachine.form.valid" class="mazi-padding button btn btn-lg">Add Machine
+              <img *ngIf="loader_2" src="assets/images/loader.gif" width="25">
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Add /Modal -->
+
+<!-- Edit Modal -->
+<div *ngIf="modal_2 && categories" class="modal-b" id="modal-two" aria-hidden="true">
+  <div class="modal-dial">
+    <div class="modal-header">
+      <h2>Edit Machine</h2>
+      <a href (click)="modal_2=false" class="btn-close" aria-hidden="true">×</a>
+    </div>
+    <div class="modal-body">
+      <div class="login-form">
+        <form style="margin-bottom: 0em;">
+          <div class="row">
+            <!-- Name -->
+            <div class="form-group six columns">
+              <label for="name">Name of Machinary</label>
+              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="editMachine.name">
+            </div>
+            <!-- Categories -->
+            <div class="form-group six columns">
+              <label for="categories">Category</label>
+              <select class="form-control" id="categories" name="category" [(ngModel)]="editMachine.category">
+                <option disabled>{{editMachine.category}}</option>
+                <option *ngFor="let category of categories" class="mazi-text-transform" [ngValue]="category.category_name">{{category.category_name}} </option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Location -->
+            <div class="form-group six columns">
+              <label for="categories">Location</label>
+              <select class="form-control" id="categories" name="category" [(ngModel)]="editMachine.location">
+                <option disabled>Select Loction</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Port Harcourt">PH</option>
+              </select>
+            </div>
+            <!-- Price -->
+            <div class="form-group six columns">
+              <label for="price">Price (in Naira)</label>
+              <input type="number" class="form-control" id="price" placeholder="N1000" name="price" [(ngModel)]="editMachine.price">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="phone">Description</label>
+              <textarea class="form-control" name="description" [(ngModel)]="editMachine.description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="image">Upload Image</label>
+              <input class="u-full-width" id="image" placeholder="Company Phone Number" style="border: 1px #D1D1D1 solid;border-radius: 5px;padding: 6px 0;"
+                name="file" type="file" accept=".png, .jpg, .jpeg" (change)="grabImage(0,$event)" #photo="ngModel" [(ngModel)]="photo.file" required>
+              <span *ngIf="photoLoader" class="text-warning">
+                <strong>Please wait, image uploading...</strong>
+              </span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button (click)="updateMachine()" id="edBtn" class="mazi-padding button btn btn-lg">Update Machine
+              <img *ngIf="loader_2" src="assets/images/loader.gif" width="25">
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- /Edit Modal -->

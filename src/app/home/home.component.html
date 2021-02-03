@@ -1,0 +1,168 @@
+<app-header [page]="page"></app-header>
+<app-search></app-search>
+<div class="container content" style="width: 100%;">
+    <!-- <div *ngFor="let classified of classifieds">
+        <a *ngIf="classified.advert_area == 'Top'" [href]="classified.sponsor">
+            <img [src]="classified.advert_image" class="" style="padding: 5px;background: #f3f3f3; border: 1px solid #f9f9f9; max-width: 100%; min-width: 100%; display: block !important;">
+        </a>
+
+    </div>
+
+    <br> -->
+    <div *ngIf="loader" align="center">
+        <br>
+        <br>
+        <img src="assets/images/loader.gif" width="200" />
+    </div>
+    <div *ngIf="networkError" align="center">
+        <br>
+        <br>
+        <h4>Network error!</h4>
+    </div>
+    <h4 class="text-center">Popular Categories</h4>
+    <div *ngIf="!loader && !networkError" class="cat-featured row">
+        
+        <ul *ngFor="let category of categories">
+            <li (click)="machineryCategory(category.category_name)" class="three columns">
+                <a>
+                    <img [src]="category.image ? category.image : 'assets/images/icon/cranes.png'">
+                    <p class="mazi-text-transform">{{category.category_name}}</p>
+                </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+
+    </div>
+    <div class="text-center">
+        <p>
+            <a (click)="allCategories()" class="button button-primary">View all categories</a>
+        </p>
+    </div>
+    <hr>
+    <br>
+    <div class="clearfix"></div>
+    <h4 *ngIf="!loader && !networkError" class="text-center">Featured Machines</h4>
+    <div *ngIf="!loader && !networkError" class="row">
+        <div *ngFor="let machinery of machineries" class="three columns">
+            <div>
+                <a [routerLink]="['/machine',machinery._id]" class="featured-item">
+                    <img class="mazi-img" [src]="machinery.image ? machinery.image : 'assets/images/logo-white.png'">
+                    <div class="list-name mazi-text-transform" [title]="machinery.name">{{stringCount(machinery.name)}}</div>
+                    <div class="location">
+                        <i class="fa fa-map-marker"></i> {{machinery.location}}</div>
+                    <div class="price">N{{machinery.price | number}}
+                        <span [innerHTML]="machinery.classified ? 'Buy' : 'Per Day'"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- <div *ngFor="let machinery of machineries" class="slider">
+            <div>
+                <a [routerLink]="['/machinery',machinery._id]" class="featured-item">
+                    <img *ngIf="machinery.image" src="{{machinery.image}}">
+                    <img *ngIf="!machinery.image" src="assets/images/logo-white.png">
+                    <div class="list-name">{{machinery.name}}</div>
+                    <div class="location">
+                        <i class="fa fa-map-marker"></i> {{machinery.location}}</div>
+                    <div class="price">N{{machinery.price}}
+                        <span>per day</span>
+                    </div>
+                </a>
+            </div>
+        </div> -->
+
+    </div>
+    <!-- Categories -->
+    <!-- <div *ngIf="!loader && !networkError" class="cat-featured">
+        <h4 class="text-center">Popular Categories</h4>
+        <ul *ngFor="let category of categories" class="cate">
+            <li *ngIf="category.category_name == 'Road Construction'" (click)="machineryCategory(category.category_name)">
+                <a>
+                    <img src="assets/images/icon/road.png">
+                    <p>{{category.category_name}}</p>
+                </a>
+            </li>
+            <li *ngIf="category.category_name == 'Power Generation'" (click)="machineryCategory(category.category_name)">
+                <a>
+                    <img src="assets/images/icon/power.png">
+                    <p>{{category.category_name}}</p>
+                </a>
+            </li>
+            <li *ngIf="category.category_name == 'Forklifts'" (click)="machineryCategory(category.category_name)">
+                <a>
+                    <img src="assets/images/icon/forklift.png">
+                    <p>{{category.category_name}}</p>
+                </a>
+            </li>
+            <li *ngIf="category.category_name == 'Crane'" (click)="machineryCategory(category.category_name)">
+                <a>
+                    <img src="assets/images/icon/cranes.png">
+                    <p>{{category.category_name}}</p>
+                </a>
+            </li>
+            <li *ngIf="category.category_name == 'Drilling Machine'" (click)="machineryCategory(category.category_name)">
+                <a>
+                    <img src="assets/images/icon/drill.png">
+                    <p>{{category.category_name}}</p>
+                </a>
+            </li>
+            <li *ngIf="category.category_name == 'Earth Moving'" (click)="machineryCategory(category.category_name)">
+                <a>
+                    <img src="assets/images/icon/earth.png">
+                    <p>{{category.category_name}}</p>
+                </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+        <div class="text-center">
+            <p>
+                <a [routerLink]="['/machineries']" class="button button-primary">View all listings</a>
+            </p>
+        </div>
+    </div> -->
+    <div class="clearfix"></div>
+    <!-- How it works -->
+    <div *ngIf="!loader && !networkError" class="how">
+        <h4 class="text-center">How it works</h4>
+        <div class="row text-center">
+            <div class="four columns">
+                <img src="assets/images/how-to1.png">
+                <p>Machines are listed by various owners and vendors</p>
+            </div>
+            <div class="four columns">
+                <img src="assets/images/how-to2.png">
+                <p>Customers can search for machines that they are interested in using for their work.</p>
+            </div>
+            <div class="four columns">
+                <img src="assets/images/how-to3.png">
+                <p>Customers are connected to the owner of the piece of machine they need.</p>
+            </div>
+        </div>
+        <div *ngFor="let classified of classifieds">
+            <p *ngIf="classified.advert_area == 'Below'">
+                <img [src]="classified.advert_image" class="" style="padding: 5px;background: #f3f3f3; border: 1px solid #f9f9f9; max-width: 100%; min-width: 100%; display: block !important;">
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="!loader && !networkError" class="subscribe">
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="five columns">
+                    <h4>Subscribe to stay updated</h4>
+                    <p>Sign up for FREE email alerts on listings</p>
+                </div>
+                <div class="five columns">
+                    <input class="u-full-width" placeholder="Type your email here" id="subscribe" type="text" style="margin-top: 20px;">
+                </div>
+                <div class="two columns">
+                    <input class="button button-primary" value="SEARCH" type="submit" style="margin-top: 20px;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<app-footer></app-footer>

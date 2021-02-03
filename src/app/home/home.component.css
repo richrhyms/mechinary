@@ -1,0 +1,14 @@
+.cate {
+    left: 2.5em !important;
+    /* text-align: center; */
+    position: relative;
+}
+
+.adverts{
+    padding: 5px;
+    background: #f3f3f3;
+    border: 1px solid #f9f9f9;
+    max-width: 100%;
+    min-width: 100%;
+    display: block !important;
+}

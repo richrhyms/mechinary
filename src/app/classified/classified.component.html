@@ -1,0 +1,200 @@
+<app-header [page]="page"></app-header>
+<!-- <app-search></app-search> -->
+<div class="header">
+  <div class="container">
+    <h4 class="text-center">Search for Machines to Buy in Nigeria</h4>
+    <form>
+      <div class="row">
+        <div class="four columns">
+          <label for="what">What do you need?</label>
+          <select class="u-full-width" id="what" name="category" [(ngModel)]="filterData.category">
+            <option selected>Select category</option>
+            <option *ngFor="let category of categories" class="mazi-text-transform" [ngValue]="category.category_name">{{category.category_name}}</option>
+          </select>
+        </div>
+        <div class="four columns">
+          <label for="where">Where do you need it?</label>
+          <select class="u-full-width" id="what2" name="category" [(ngModel)]="filterData.location">
+            <option value="PH" selected>Select location</option>
+            <option value="Abuja">Abuja</option>
+            <option value="Asaba">Asaba</option>
+            <option value="Calabar">Calabar</option>
+            <option value="Lagos">Lagos</option>
+            <option value="Portharcourt">Portharcourt</option>
+            <option value="Warri">Warri</option>
+          </select>
+        </div>
+        <!-- <div class="three columns">
+          <label for="when">When do you need it?</label>
+          <input data-toggle="datepicker" class="u-full-width" placeholder="When do you need it?" type="text" name="datepicker" [(ngModel)]="machinery.datepicker">
+        </div> -->
+        <div class="four columns">
+          <div style="margin-top: 30px;"></div>
+          <input class="button button-primary" value="SEARCH" type="submit" (click)="searchMachineries()">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Content
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container content">
+    <div class="breadcrumb">
+      <a routerLink="/home">Home</a>
+      <!-- <i class="fa fa-angle-double-right"></i>
+      <a href="#">Catalog</a> -->
+      <i class="fa fa-angle-double-right"></i>
+      All Machines
+    </div>
+    <div class="row">
+    <!-- <div class="three columns">
+        <div class="filter">
+          <h4>
+            <i class="fa fa-filter"></i> Filter</h4>
+          <h5>Categories</h5>
+          <ul>
+            <li (click)="active=1;active2=0" [class.mazi-active]="active==1">
+              <a (click)="getMachineries(1)"> Reset Filter -->
+                <!-- <span>(55)</span> -->
+              <!-- </a>
+            </li>
+            <li *ngFor="let category of categories" (click)="active=category._id" [class.mazi-active]="active==category._id">
+              <a (click)="filterParams(0,category.category_name)">{{category.category_name}} -->
+                <!-- <span>(23)</span> -->
+              <!-- </a>
+            </li>
+          </ul> -->
+          <!-- Location -->
+          <!-- <h5>Locations</h5>
+          <ul>
+            <li (click)="active2=1" [class.mazi-active]="active2==1">
+              <a (click)="filterParams(1,$event)">Abuja -->
+                <!-- <span>(55)</span> -->
+              <!-- </a>
+            </li>
+            <li (click)="active2=2" [class.mazi-active]="active2==2">
+              <a (click)="filterParams(1,$event)">Lagos -->
+                <!-- <span>(55)</span> -->
+              <!-- </a>
+            </li>
+            <li (click)="active2=3" [class.mazi-active]="active2==3">
+              <a (click)="filterParams(1,$event)">Port Harcourt -->
+                <!-- <span>(13)</span> -->
+              <!-- </a>
+            </li>
+            <li (click)="active2=4" [class.mazi-active]="active2==4">
+              <a (click)="filterParams(1,$event)">Calabar -->
+                <!-- <span>(9)</span> -->
+              <!-- </a>
+            </li>
+            <li (click)="active2=5" [class.mazi-active]="active2==5">
+              <a (click)="filterParams(1,$event)">Warri -->
+                <!-- <span>(4)</span> -->
+              <!-- </a>
+            </li>
+          </ul> -->
+          <!-- Price -->
+          <!-- <h5>Price</h5>
+          <select class="u-full-width" id="min" title="Min Price" (change)="filterPrice()" name="minprice" [(ngModel)]="priceRange[0].min">
+            <option disabled value=0>Min(&#8358;)</option>
+            <option value=5000>&#8358;5,000</option>
+            <option value=10000>&#8358;10,000</option>
+            <option value=500000>&#8358;50,000</option>
+            <option value=200000>&#8358;200,000</option>
+            <option value=500000>&#8358;500,000</option>
+          </select>
+          <select class="u-full-width" id="max" name="maxprice" (change)="filterPrice()" [(ngModel)]="priceRange[0].max">
+            <option disabled value=0>Max(&#8358;)</option>
+            <option value=50000>&#8358;50,000</option>
+            <option value=100000>&#8358;100,000</option>
+            <option value=300000>&#8358;300,000</option>
+            <option value=700000>&#8358;700,000</option>
+            <option value=1000000>&#8358;1,000,000</option>
+          </select>
+          <input class="button-primary" [disabled]="disableFilter" value="Search Filter" type="submit" (click)="filterSearch()">
+        </div>
+      </div> -->
+      <div class="twelve columns catalog-page">
+        <div *ngIf="loader" align="center">
+          <br>
+          <br>
+          <img src="assets/images/loader.gif" width="200" />
+        </div>
+        <div *ngIf="networkError" align="center">
+          <br>
+          <br>
+          <h4>Network error!</h4>
+        </div>
+        <div *ngIf="!loader && !networkError && machineries?.length<=0" align="center" style="margin-bottom: 42em;">
+          <br>
+          <br>
+          <h4>No Machine to display</h4>
+          <!-- <a (click)="getMachineries()"><small>Click to refresh page</small></a> -->
+        </div>
+        <div *ngIf="!loader && !networkError" class="row">
+          <div *ngFor="let machinery of machineries" class="four columns">
+            <a [routerLink]="['/machine',machinery._id]" class="featured-item">
+              <img [src]="machinery.image ? machinery.image : 'assets/images/logo-white.png'" class="catalog mazi-img">
+              <div class="list-name mazi-text-transform" style="font-size: 15px !important;" [title]="machinery.name">{{stringCount(machinery.name)}}</div>
+              <div class="location">
+                <i class="fa fa-map-marker"></i> {{machinery.location}}</div>
+              <div class="price">N{{machinery.price | number}}
+                <span>Buy</span>
+              </div>
+            </a>
+          </div>
+  
+        </div>
+  
+        <!-- Pagination -->
+        <div class="clearfix"></div>
+        <div *ngIf="!loader" class="pagy">
+          <ul class="pagination pagination_type1 pagination_type4">
+            <li class="pagination__item" style="margin-right: 10px;">
+              <a (click)="disablePrev ? null  : pagination(page-1)" [class]="disablePrev ? 'mazi-danger'  : 'mazi-success'" class="pagination__number">←
+                <span class="pagination__control pagination__control_prev">prev</span>
+              </a>
+            </li>
+            <!-- <li class="pagination__item">
+              <a href="#0" class="pagination__number">1</a>
+            </li>
+            <li class="pagination__item">
+              <span class="pagination__number pagination__number_active">2</span>
+            </li>
+            <li class="pagination__item">
+              <a href="#0" class="pagination__number">3</a>
+            </li>
+            <li class="pagination__item">
+              <a href="#0" class="pagination__number">4</a>
+            </li>
+            <li class="pagination__item">
+              <a href="#0" class="pagination__number">5</a>
+            </li> -->
+            <li class="pagination__item" style="margin-left: 10px;">
+              <a class="pagination__number" (click)="disableNext ? null  : pagination(page+1)" [class]="disableNext ? 'mazi-danger'  : 'mazi-success'">
+                <span class="pagination__control pagination__control_next">next</span>→</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="subscribe">
+    <div class="container">
+      <form>
+        <div class="row">
+          <div class="five columns">
+            <h4>Subscribe to stay updated</h4>
+            <p>Sign up for FREE email alerts on listings</p>
+          </div>
+          <div class="five columns">
+            <input class="u-full-width" placeholder="Type your email here" id="subscribe" type="text" style="margin-top: 20px;">
+          </div>
+          <div class="two columns">
+            <input class="button button-primary" value="SEARCH" type="submit" style="margin-top: 20px;">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+<app-footer></app-footer>

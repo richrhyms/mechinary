@@ -1,0 +1,33 @@
+<div class="top-pager">
+</div>
+<div class="top">
+  <div class="container">
+    <div class="four columns">
+      <img [routerLink]="['/home']" src="assets/images/logo-white.png" class="logo">
+    </div>
+    <div class="eight columns">
+
+      <a *ngIf="status == 'home' && !isLoggedIn" (click)="listMachinery()" class="button button-list">List a Machine</a>
+      <a *ngIf="status == 'home' && isLoggedIn" (click)="logout()" class="button button-login">Log out</a>
+      <a *ngIf="status == 'home' && !isLoggedIn" [routerLink]="['/login']" class="button button-login" routerLinkActive="active">Login</a>
+      <!-- <a *ngIf="status == 'home' && (page=='home'|| page=='login') && !isLoggedIn" class="button button-login" [routerLink]="['/register']">Register</a> -->
+      <ul class="menu">
+        <li *ngIf="status == 'home'">
+          <a [routerLink]="['/about']" routerLinkActive="active">About us</a>
+        </li>
+        <li *ngIf="status == 'home'">
+          <a [routerLink]="['/pricing']" routerLinkActive="active">Pricing</a>
+        </li>
+        <li *ngIf="status == 'home'">
+          <a [routerLink]="['/machines']" routerLinkActive="active">Rent Machine</a>
+        </li>
+        <li *ngIf="status == 'home'">
+          <a [routerLink]="['/classified']" routerLinkActive="active">Buy Machine</a>
+        </li>
+        <li *ngIf="status == 'home' && isLoggedIn">
+          <a [routerLink]="['/profile/dashboard']" routerLinkActive="active">My Account</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
